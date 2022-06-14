@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {firstValueFrom} from "rxjs";
-import {HotdogClassification} from "@seefood/api-interfaces";
+import {HttpClient} from '@angular/common/http';
+import {firstValueFrom} from 'rxjs';
+import {HotdogClassification} from '@seefood/api-interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClassifierService {
 
@@ -17,7 +17,7 @@ export class ClassifierService {
     const uploadData = new FormData();
     uploadData.append('file', file, file.name);
 
-    const classifyRequest = this.http.post<HotdogClassification>("/api/classify", uploadData);
+    const classifyRequest = this.http.post<HotdogClassification>('/api/classify', uploadData);
 
     return firstValueFrom(classifyRequest);
   }

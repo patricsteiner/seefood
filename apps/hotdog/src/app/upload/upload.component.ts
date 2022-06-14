@@ -9,7 +9,7 @@ import {ClassifierService} from '../classifier.service';
 export class UploadComponent {
 
   constructor(
-    private readonly classifier: ClassifierService
+    private readonly classifier: ClassifierService,
   ) {
   }
 
