@@ -8,11 +8,17 @@ import {HotdogClassification} from "@seefood/api-interfaces";
 })
 export class ClassifierService {
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+  ) {
+  }
 
   classifyHotdog(file: File): Promise<HotdogClassification> {
     const uploadData = new FormData();
     uploadData.append('file', file, file.name);
-    return firstValueFrom(this.http.post<HotdogClassification>("/api/classify", uploadData))
+
+    const classifyRequest = this.http.post<HotdogClassification>("/api/classify", uploadData);
+
+    return firstValueFrom(classifyRequest);
   }
 }

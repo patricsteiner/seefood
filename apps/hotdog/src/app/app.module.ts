@@ -13,7 +13,11 @@ import {MatButtonModule} from "@angular/material/button";
 import {FormsModule} from "@angular/forms";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, UploadComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    UploadComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
