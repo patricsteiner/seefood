@@ -1,0 +1,14 @@
+.seefood-upload-form {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  max-width: 500px;
+
+  input, img {
+    margin-bottom: 16px;
+  }
+
+  button {
+    align-self: baseline;
+  }
+}

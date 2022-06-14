@@ -1,9 +1,16 @@
-<form>
+<form class="seefood-upload-form">
   <input
     type="file"
     accept="image/*"
     (change)="setFile($event.target)"
     name="file"
   >
+
+  <img
+    *ngIf="filePreviewSource"
+    [src]="filePreviewSource"
+    alt="Image preview"
+  />
+
   <button type="submit">Upload</button>
 </form>
