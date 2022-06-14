@@ -15,8 +15,8 @@ export class UploadComponent {
 
   file?: File;
 
-  setFile(fileInputElement: EventTarget) {
-    const fileList = (fileInputElement as HTMLInputElement).files;
+  setFile(fileInputElement: EventTarget | null) {
+    const fileList = (fileInputElement as HTMLInputElement)?.files;
 
     if (fileList) {
       this.file = fileList[0];
