@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import {ClassifierService} from "../classifier.service";
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'seefood-upload',
@@ -8,8 +7,7 @@ import {ClassifierService} from "../classifier.service";
 })
 export class UploadComponent {
 
-  constructor(private classifier: ClassifierService) {
-  }
+  @Output() upload = new EventEmitter<File>();
 
   file?: File
 
@@ -17,9 +15,8 @@ export class UploadComponent {
     this.file = fileInputElement.files[0]
   }
 
-  async classify() {
+  uploadFile() {
     if (!this.file) throw Error("file is undefined")
-    const res = await this.classifier.classifyHotdog(this.file)
-    alert(JSON.stringify(res))
+    this.upload.emit(this.file);
   }
 }
