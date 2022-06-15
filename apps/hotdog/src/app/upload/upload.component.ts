@@ -15,11 +15,6 @@ export class UploadComponent {
 
   @ViewChild('previewImage') previewImage!: ElementRef;
 
-  imageCenterPosition: ImagePosition = {
-    x: 0,
-    y: 0
-  };
-
   file?: File
 
   fileBase64Source?: string;
@@ -27,6 +22,11 @@ export class UploadComponent {
   imageChangedEvent?: any;
 
   progressSpinnerDiameter = 64;
+
+  imageCenterPosition: ImagePosition = {
+    x: 0,
+    y: 0
+  };
 
   imageCropped(event: any) {
     this.fileBase64Source = event.base64;
