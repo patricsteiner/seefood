@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ClassificationResultComponent } from './classification-result/classification-result.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ImageCropperModule} from "ngx-image-cropper";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatButtonModule,
     FormsModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ImageCropperModule
   ],
   providers: [],
   bootstrap: [AppComponent],

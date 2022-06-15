@@ -4,18 +4,26 @@
     <input
       type="file"
       accept="image/*"
-      (change)="setFile($event.target)"
+      (change)="setFile($event)"
       name="file"
       [disabled]="uploadInProgress"
     >
 
     <div class="seefood-upload-preview">
+
+      <image-cropper
+        *ngIf="imageChangedEvent && !uploadInProgress"
+        [imageChangedEvent]="imageChangedEvent"
+        (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+
       <img
-        *ngIf="filePreviewSource"
+        *ngIf="fileBase64Source && uploadInProgress"
         class="seefood-upload-preview-image"
         alt="Upload preview image"
-        [src]="filePreviewSource"
+        [src]="fileBase64Source"
         [class.upload-progress]="uploadInProgress"
+        (load)="setImageCenterPosition()"
         #previewImage
       />
 
@@ -24,6 +32,7 @@
         diameter="64"
         [ngStyle]="{'top': imageCenterPosition.y + 'px', 'left': imageCenterPosition.x + 'px'}"
       ></mat-spinner>
+
     </div>
 
     <button

@@ -28,5 +28,9 @@
     .upload-progress {
       opacity: 0.5;
     }
+
+    ::ng-deep image-cropper div {
+      width: auto;
+    }
   }
 }

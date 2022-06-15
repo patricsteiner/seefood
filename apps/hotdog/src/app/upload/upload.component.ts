@@ -1,5 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {ImagePosition} from "./model/image-position";
+import {base64ToFile} from "ngx-image-cropper";
 
 @Component({
   selector: 'seefood-upload',
@@ -14,39 +15,39 @@ export class UploadComponent {
 
   @ViewChild('previewImage') previewImage!: ElementRef;
 
+  imageCenterPosition: ImagePosition = {
+    x: 0,
+    y: 0
+  };
+
   file?: File
 
-  filePreviewSource?: string;
+  fileBase64Source?: string;
+
+  imageChangedEvent?: any;
 
   progressSpinnerDiameter = 64;
 
-  get imageCenterPosition(): ImagePosition {
-    const progressSpinnerRadius = this.progressSpinnerDiameter / 2
-
-    return {
-      x: this.previewImage.nativeElement.offsetWidth / 2 - progressSpinnerRadius,
-      y: this.previewImage.nativeElement.offsetHeight / 2 - progressSpinnerRadius
-    }
+  imageCropped(event: any) {
+    this.fileBase64Source = event.base64;
   }
 
-  setFile(fileInputElement: any) {
-    this.file = fileInputElement.files[0]
-    const fileReader = new FileReader();
-
-    fileReader.onload = () => {
-      this.filePreviewSource = fileReader.result as string;
-    }
-
-    if (this.file) {
-      const blob = this.file as Blob;
-      fileReader.readAsDataURL(blob);
-    } else {
-      this.filePreviewSource = undefined;
-    }
+  setFile(event: any) {
+    this.imageChangedEvent = event;
   }
 
   uploadFile() {
-    if (!this.file) throw Error("file is undefined")
-    this.upload.emit(this.file);
+    if (!this.fileBase64Source) throw Error("file is undefined")
+
+    const imageFile = base64ToFile(this.fileBase64Source) as File;
+    this.upload.emit(imageFile);
+  }
+
+  setImageCenterPosition(): void {
+    const progressSpinnerRadius = this.progressSpinnerDiameter / 2
+    this.imageCenterPosition = {
+      x: this.previewImage ? this.previewImage.nativeElement.offsetWidth / 2 - progressSpinnerRadius : 0,
+      y: this.previewImage ? this.previewImage.nativeElement.offsetHeight / 2 - progressSpinnerRadius : 0,
+    }
   }
 }
