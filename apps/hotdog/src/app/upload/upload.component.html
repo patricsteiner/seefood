@@ -1,13 +1,25 @@
 <div class="seefood-upload">
 
-  <form class="seefood-upload-form" [formGroup]="uploadFormGroup" (ngSubmit)="uploadFile()">
+  <form class="seefood-upload-form" [formGroup]="uploadFormGroup">
     <input
+      class="hidden-input"
       type="file"
       accept="image/*"
-      (change)="setFile($event)"
       name="file"
       formControlName="image"
+      (change)="setFile($event)"
+      #fileInput
     />
+
+    <button
+      class="file-input-button"
+      mat-button
+      color="primary"
+      (click)="fileInput.click()"
+      [disabled]="uploadInProgress"
+    >
+      Choose image file
+    </button>
 
     <div class="seefood-upload-preview">
 
@@ -36,12 +48,15 @@
 
     </div>
 
+    <span>{{file?.name}}</span>
+
     <button
       class="upload-button"
       type="submit"
       mat-flat-button
       color="primary"
       [disabled]="uploadInProgress || uploadFormGroup.invalid"
+      (click)="uploadFile()"
     >
       Upload
     </button>

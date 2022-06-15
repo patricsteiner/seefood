@@ -52,6 +52,7 @@ export class UploadComponent {
   }
 
   setFile(event: any) {
+    this.file = event.target.files[0]
     this.imageChangedEvent = event;
   }
 
@@ -67,8 +68,8 @@ export class UploadComponent {
   setImageCenterPosition(): void {
     const progressSpinnerRadius = this.progressSpinnerDiameter / 2
     this.imageCenterPosition = {
-      x: this.previewImage ? this.previewImage.nativeElement.offsetWidth / 2 - progressSpinnerRadius : 0,
-      y: this.previewImage ? this.previewImage.nativeElement.offsetHeight / 2 - progressSpinnerRadius : 0,
+      x: this.previewImage.nativeElement.offsetWidth / 2 - progressSpinnerRadius,
+      y: this.previewImage.nativeElement.offsetHeight / 2 - progressSpinnerRadius,
     }
   }
 }

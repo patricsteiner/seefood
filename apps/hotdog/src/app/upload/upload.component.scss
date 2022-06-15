@@ -4,6 +4,14 @@
     display: flex;
     flex-direction: column;
 
+    .hidden-input {
+      display: none;
+    }
+
+    .file-input-button {
+      align-self: start;
+    }
+
     .upload-button {
       align-self: start;
       margin-top: 16px;
@@ -12,7 +20,7 @@
 
   &-preview {
     position: relative;
-    margin-top: 16px;
+    margin: 16px 0;
     max-width: 400px;
     max-height: 400px;
 
