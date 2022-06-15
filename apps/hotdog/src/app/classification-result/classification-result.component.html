@@ -1,0 +1,23 @@
+<div class="seefood-classification-result">
+  <h3 class="seefood-classification-result-title">Classification result:</h3>
+
+  <div class="seefood-classification-result-data">
+    <div
+      *ngIf="classificationResult.isHotdog; else noHotdogResult"
+      class="positive"
+    >
+      <mat-icon color="primary">done</mat-icon>
+      <span>This is definitively a hotdog! 🧐</span>
+    </div>
+
+    <ng-template #noHotdogResult>
+      <div class="negative">
+        <mat-icon color="error">close</mat-icon>
+        <span>This is not a hotdog! 😔</span>
+      </div>
+    </ng-template>
+
+    <span>Confidence: {{classificationResult.confidence}}</span>
+
+  </div>
+</div>

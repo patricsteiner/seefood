@@ -9,11 +9,18 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { UploadComponent } from './upload/upload.component';
-import {MatButtonModule} from "@angular/material/button";
-import {FormsModule} from "@angular/forms";
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { ClassificationResultComponent } from './classification-result/classification-result.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, UploadComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    UploadComponent,
+    ClassificationResultComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -23,6 +30,7 @@ import {FormsModule} from "@angular/forms";
     AppRoutingModule,
     MatButtonModule,
     FormsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
