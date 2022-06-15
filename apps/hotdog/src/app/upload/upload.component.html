@@ -6,20 +6,32 @@
       accept="image/*"
       (change)="setFile($event.target)"
       name="file"
+      [disabled]="uploadInProgress"
     >
 
-    <img
-      class="preview-image"
-      *ngIf="filePreviewSource"
-      [src]="filePreviewSource"
-      alt="Upload preview image"
-    />
+    <div class="seefood-upload-preview">
+      <img
+        *ngIf="filePreviewSource"
+        class="seefood-upload-preview-image"
+        alt="Upload preview image"
+        [src]="filePreviewSource"
+        [class.upload-progress]="uploadInProgress"
+        #previewImage
+      />
+
+      <mat-spinner
+        *ngIf="uploadInProgress"
+        diameter="64"
+        [ngStyle]="{'top': imageCenterPosition.y + 'px', 'left': imageCenterPosition.x + 'px'}"
+      ></mat-spinner>
+    </div>
 
     <button
       class="upload-button"
       type="submit"
       mat-flat-button
       color="primary"
+      [disabled]="uploadInProgress"
     >
       Upload
     </button>

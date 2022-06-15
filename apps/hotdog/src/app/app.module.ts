@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ClassificationResultComponent } from './classification-result/classification-result.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ClassificationResultComponent } from './classification-result/classific
     MatButtonModule,
     FormsModule,
     MatIconModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

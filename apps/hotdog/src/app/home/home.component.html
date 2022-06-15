@@ -8,6 +8,7 @@
 
   <seefood-upload
     (upload)="upload($event)"
+    [uploadInProgress]="uploadingImage$ | async"
   ></seefood-upload>
 
   <seefood-classification-result

@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {ImagePosition} from "./model/image-position";
 
 @Component({
   selector: 'seefood-upload',
@@ -7,11 +8,26 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class UploadComponent {
 
+  @Input() uploadInProgress: boolean | null = false;
+
   @Output() upload = new EventEmitter<File>();
+
+  @ViewChild('previewImage') previewImage!: ElementRef;
 
   file?: File
 
   filePreviewSource?: string;
+
+  progressSpinnerDiameter = 64;
+
+  get imageCenterPosition(): ImagePosition {
+    const progressSpinnerRadius = this.progressSpinnerDiameter / 2
+
+    return {
+      x: this.previewImage.nativeElement.offsetWidth / 2 - progressSpinnerRadius,
+      y: this.previewImage.nativeElement.offsetHeight / 2 - progressSpinnerRadius
+    }
+  }
 
   setFile(fileInputElement: any) {
     this.file = fileInputElement.files[0]
