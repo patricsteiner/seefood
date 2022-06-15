@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { UploadComponent } from './upload/upload.component';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ClassificationResultComponent } from './classification-result/classification-result.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
@@ -34,7 +34,8 @@ import {ImageCropperModule} from "ngx-image-cropper";
     FormsModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    ImageCropperModule
+    ImageCropperModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

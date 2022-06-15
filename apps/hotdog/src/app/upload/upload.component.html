@@ -1,13 +1,13 @@
 <div class="seefood-upload">
 
-  <form class="seefood-upload-form" (ngSubmit)="uploadFile()">
+  <form class="seefood-upload-form" [formGroup]="uploadFormGroup" (ngSubmit)="uploadFile()">
     <input
       type="file"
       accept="image/*"
       (change)="setFile($event)"
       name="file"
-      [disabled]="uploadInProgress"
-    >
+      formControlName="image"
+    />
 
     <div class="seefood-upload-preview">
 
@@ -40,7 +40,7 @@
       type="submit"
       mat-flat-button
       color="primary"
-      [disabled]="uploadInProgress"
+      [disabled]="uploadInProgress || uploadFormGroup.invalid"
     >
       Upload
     </button>

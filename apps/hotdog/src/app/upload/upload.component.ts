@@ -1,6 +1,7 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ImagePosition} from "./model/image-position";
 import {base64ToFile} from "ngx-image-cropper";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'seefood-upload',
@@ -9,11 +10,29 @@ import {base64ToFile} from "ngx-image-cropper";
 })
 export class UploadComponent {
 
-  @Input() uploadInProgress: boolean | null = false;
+  private _uploadInProgress = false;
+
+  @Input() set uploadInProgress(value: boolean | null) {
+    if (value !== null) {
+      this._uploadInProgress = value;
+
+      if (!value) {
+        this.uploadFormGroup.get('image')?.enable();
+      }
+    }
+  }
+
+  get uploadInProgress(): boolean {
+    return this._uploadInProgress;
+  }
 
   @Output() upload = new EventEmitter<File>();
 
   @ViewChild('previewImage') previewImage!: ElementRef;
+
+  uploadFormGroup = new FormGroup({
+    image: new FormControl('', [Validators.required])
+  })
 
   file?: File
 
@@ -38,6 +57,8 @@ export class UploadComponent {
 
   uploadFile() {
     if (!this.fileBase64Source) throw Error("file is undefined")
+
+    this.uploadFormGroup.get('image')?.disable();
 
     const imageFile = base64ToFile(this.fileBase64Source) as File;
     this.upload.emit(imageFile);
