@@ -1,15 +1,29 @@
-<form (ngSubmit)="uploadFile()">
-  <input
-    type="file"
-    accept="image/*"
-    (change)="setFile($event.target)"
-    name="file"
-  >
-  <button
-    type="submit"
-    mat-flat-button
-    color="primary"
-  >
-    Upload
-  </button>
-</form>
+<div class="seefood-upload">
+
+  <form class="seefood-upload-form" (ngSubmit)="uploadFile()">
+    <input
+      type="file"
+      accept="image/*"
+      (change)="setFile($event.target)"
+      name="file"
+    >
+
+    <img
+      class="preview-image"
+      *ngIf="filePreviewSource"
+      [src]="filePreviewSource"
+      alt="Upload preview image"
+    />
+
+    <button
+      class="upload-button"
+      type="submit"
+      mat-flat-button
+      color="primary"
+    >
+      Upload
+    </button>
+  </form>
+
+</div>
+
