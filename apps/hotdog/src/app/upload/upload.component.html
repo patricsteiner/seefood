@@ -1,14 +1,24 @@
-<form>
-  <input
-    type="file"
-    accept="image/*"
-    (change)="setFile($event.target)"
-    name="file"
-  >
-  <button
-    type="submit"
-    (click)="classify()"
-  >
-    Upload
-  </button>
-</form>
+<div>
+
+  <div *ngIf="uploadLoading; else uploadForm" class="seefood-upload-loading-indicator">
+    <mat-spinner diameter="64"></mat-spinner>
+    <span class="loading-info">Please hold on while we are classifying your image ⏳</span>
+  </div>
+
+
+  <ng-template #uploadForm>
+    <form (ngSubmit)="classify()">
+      <input
+        type="file"
+        accept="image/*"
+        (change)="setFile($event.target)"
+        name="file"
+      >
+      <button
+        type="submit"
+      >
+        Upload
+      </button>
+    </form>
+  </ng-template>
+</div>

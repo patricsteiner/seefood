@@ -1,0 +1,12 @@
+.seefood-upload-loading-indicator {
+  margin: 16px;
+
+  mat-spinner {
+    width: 64px;
+  }
+
+  .loading-info {
+    margin-top: 16px;
+    display: block;
+  }
+}
