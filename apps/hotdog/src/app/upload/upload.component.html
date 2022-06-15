@@ -12,6 +12,7 @@
     <div class="seefood-upload-preview">
 
       <image-cropper
+        [maintainAspectRatio]="false"
         *ngIf="imageChangedEvent && !uploadInProgress"
         [imageChangedEvent]="imageChangedEvent"
         (imageCropped)="imageCropped($event)"

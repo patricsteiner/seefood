@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {ImagePosition} from "./model/image-position";
 import {base64ToFile} from "ngx-image-cropper";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -9,6 +9,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent {
+
+  @ViewChild('previewImage') previewImage!: ElementRef;
+
+  @Output() upload = new EventEmitter<File>();
 
   private _uploadInProgress = false;
 
@@ -26,14 +30,6 @@ export class UploadComponent {
     return this._uploadInProgress;
   }
 
-  @Output() upload = new EventEmitter<File>();
-
-  @ViewChild('previewImage') previewImage!: ElementRef;
-
-  uploadFormGroup = new FormGroup({
-    image: new FormControl('', [Validators.required])
-  })
-
   file?: File
 
   fileBase64Source?: string;
@@ -41,6 +37,10 @@ export class UploadComponent {
   imageChangedEvent?: any;
 
   progressSpinnerDiameter = 64;
+
+  uploadFormGroup = new FormGroup({
+    image: new FormControl('', [Validators.required])
+  })
 
   imageCenterPosition: ImagePosition = {
     x: 0,
