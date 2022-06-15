@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component} from '@angular/core';
 import {ClassifierService} from "../classifier.service";
 
 @Component({
@@ -8,18 +8,15 @@ import {ClassifierService} from "../classifier.service";
 })
 export class UploadComponent {
 
-  filePreviewSource?: string;
-
-  selectedFile?: File;
-
-  @HostListener('change', ['$event.target.files']) fileChange(list: FileList) {
-    this.setFile(list[0]);
-  }
-
   constructor(private classifier: ClassifierService) {
   }
 
-  setFile(file: File) {
+  file?: File
+
+  filePreviewSource?: string;
+
+  setFile(fileInputElement: any) {
+    this.file = fileInputElement.files[0]
     const fileReader = new FileReader();
 
     fileReader.onload = () => {
@@ -30,13 +27,13 @@ export class UploadComponent {
       }
     }
 
-    const blob = file as Blob;
+    const blob = this.file as Blob;
     fileReader.readAsDataURL(blob);
   }
 
   async classify() {
-    if (!this.selectedFile) throw Error("file is undefined")
-    const res = await this.classifier.classifyHotdog(this.selectedFile)
+    if (!this.file) throw Error("file is undefined")
+    const res = await this.classifier.classifyHotdog(this.file)
     alert(JSON.stringify(res))
   }
 }
