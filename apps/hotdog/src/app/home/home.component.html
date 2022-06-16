@@ -1,19 +1,15 @@
-<div style="padding: 32px">
-  <h2>How does this work?</h2>
-  <ol>
-    <li>You upload an image</li>
-    <li>We tell you if it's a hotdog or not</li>
-    <li>Done!</li>
-  </ol>
+<seefood-default-layout>
+  <div style="padding: 32px">
+    <h2>How does this work?</h2>
+    <ol>
+      <li>You upload an image</li>
+      <li>We tell you if it's a hotdog or not</li>
+      <li>Done!</li>
+    </ol>
 
-  <seefood-upload
-    (upload)="upload($event)"
-    [uploadInProgress]="uploadingImage$ | async"
-  ></seefood-upload>
-
-  <seefood-classification-result
-    *ngIf="(classificationResult$ | async) as classificationResult"
-    [classificationResult]="classificationResult"
-  ></seefood-classification-result>
-
-</div>
+    <seefood-upload
+      (upload)="upload($event)"
+      [uploadInProgress]="uploadingImage$ | async"
+    ></seefood-upload>
+  </div>
+</seefood-default-layout>

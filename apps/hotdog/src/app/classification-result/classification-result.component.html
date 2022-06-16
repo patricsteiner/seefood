@@ -3,7 +3,7 @@
 
   <div class="seefood-classification-result-data">
     <div
-      *ngIf="classificationResult.isHotdog; else noHotdogResult"
+      *ngIf="data.isHotdog; else noHotdogResult"
       class="positive"
     >
       <mat-icon color="primary">done</mat-icon>
@@ -17,7 +17,16 @@
       </div>
     </ng-template>
 
-    <span>Confidence: {{classificationResult.confidence}}</span>
+    <span>Confidence: {{data.confidence}}</span>
 
   </div>
+
+  <button
+    mat-flat-button
+    color="primary"
+    class="seefood-classification-result-action"
+    (click)="close()"
+  >
+    Ok!
+  </button>
 </div>

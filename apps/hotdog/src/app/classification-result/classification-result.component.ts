@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {HotdogClassification} from "@seefood/api-interfaces";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'seefood-classification-result',
@@ -8,6 +9,13 @@ import {HotdogClassification} from "@seefood/api-interfaces";
 })
 export class ClassificationResultComponent {
 
-  @Input() classificationResult!: HotdogClassification;
+  constructor(
+    private readonly dialogRef: MatDialogRef<ClassificationResultComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: HotdogClassification
+  ) {
+  }
 
+  close() {
+    this.dialogRef.close();
+  }
 }

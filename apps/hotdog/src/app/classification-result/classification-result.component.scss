@@ -1,4 +1,6 @@
 .seefood-classification-result {
+  display: flex;
+  flex-direction: column;
 
   &-title {
     margin-top: 16px;
@@ -17,5 +19,10 @@
         margin-bottom: 16px;
       }
     }
+  }
+
+  &-action {
+    margin-top: 16px;
+    align-self: end;
   }
 }
