@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
-import {ImagePosition} from "./model/image-position";
-import {base64ToFile} from "ngx-image-cropper";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ImagePosition} from './model/image-position';
+import {base64ToFile} from 'ngx-image-cropper';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'seefood-upload',
@@ -30,7 +30,7 @@ export class UploadComponent {
     return this._uploadInProgress;
   }
 
-  file?: File
+  file?: File;
 
   fileBase64Source?: string;
 
@@ -39,12 +39,12 @@ export class UploadComponent {
   progressSpinnerDiameter = 64;
 
   uploadFormGroup = new FormGroup({
-    image: new FormControl('', [Validators.required])
-  })
+    image: new FormControl('', [Validators.required]),
+  });
 
   imageCenterPosition: ImagePosition = {
     x: 0,
-    y: 0
+    y: 0,
   };
 
   imageCropped(event: any) {
@@ -52,12 +52,14 @@ export class UploadComponent {
   }
 
   setFile(event: any) {
-    this.file = event.target.files[0]
+    this.file = event.target.files[0];
     this.imageChangedEvent = event;
   }
 
   uploadFile() {
-    if (!this.fileBase64Source) throw Error("file is undefined")
+    if (!this.fileBase64Source) {
+      throw Error('file is undefined');
+    }
 
     this.uploadFormGroup.get('image')?.disable();
 
@@ -66,10 +68,10 @@ export class UploadComponent {
   }
 
   setImageCenterPosition(): void {
-    const progressSpinnerRadius = this.progressSpinnerDiameter / 2
+    const progressSpinnerRadius = this.progressSpinnerDiameter / 2;
     this.imageCenterPosition = {
       x: this.previewImage.nativeElement.offsetWidth / 2 - progressSpinnerRadius,
       y: this.previewImage.nativeElement.offsetHeight / 2 - progressSpinnerRadius,
-    }
+    };
   }
 }

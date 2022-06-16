@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {ClassifierService} from "../classifier.service";
-import {BehaviorSubject, take, tap} from "rxjs";
-import {ClassificationResultComponent} from "../classification-result/classification-result.component";
-import {MatDialog} from "@angular/material/dialog";
+import {ClassifierService} from '../classifier.service';
+import {BehaviorSubject, take, tap} from 'rxjs';
+import {ClassificationResultComponent} from '../classification-result/classification-result.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'seefood-home',
@@ -15,12 +15,13 @@ export class HomeComponent {
 
   constructor(
     private readonly classifierService: ClassifierService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
   ) {
   }
 
   upload(file: File) {
     this.uploadingImage$.next(true);
+
     this.classifierService.classifyHotdog(file)
       .pipe(
         tap(() => this.uploadingImage$.next(false)),
@@ -28,7 +29,7 @@ export class HomeComponent {
       )
       .subscribe(result => {
         this.dialog.open(ClassificationResultComponent, {
-          data: result
+          data: result,
         });
       });
   }
