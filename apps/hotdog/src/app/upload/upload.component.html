@@ -1,16 +1,50 @@
-<form>
-  <input
-    type="file"
-    accept="image/*"
-    (change)="setFile($event.target)"
-    name="file"
-  >
-  <button
-    type="submit"
-    mat-flat-button
-    color="primary"
-    (click)="classify()"
-  >
-    Upload
-  </button>
-</form>
+<div class="seefood-upload">
+
+  <form class="seefood-upload-form" (ngSubmit)="uploadFile()">
+    <input
+      type="file"
+      accept="image/*"
+      (change)="setFile($event)"
+      name="file"
+      [disabled]="uploadInProgress"
+    >
+
+    <div class="seefood-upload-preview">
+
+      <image-cropper
+        *ngIf="imageChangedEvent && !uploadInProgress"
+        [imageChangedEvent]="imageChangedEvent"
+        (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+
+      <img
+        *ngIf="fileBase64Source && uploadInProgress"
+        class="seefood-upload-preview-image"
+        alt="Upload preview image"
+        [src]="fileBase64Source"
+        [class.upload-progress]="uploadInProgress"
+        (load)="setImageCenterPosition()"
+        #previewImage
+      />
+
+      <mat-spinner
+        *ngIf="uploadInProgress"
+        diameter="64"
+        [ngStyle]="{'top': imageCenterPosition.y + 'px', 'left': imageCenterPosition.x + 'px'}"
+      ></mat-spinner>
+
+    </div>
+
+    <button
+      class="upload-button"
+      type="submit"
+      mat-flat-button
+      color="primary"
+      [disabled]="uploadInProgress"
+    >
+      Upload
+    </button>
+  </form>
+
+</div>
+
