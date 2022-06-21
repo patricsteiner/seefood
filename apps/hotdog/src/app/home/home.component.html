@@ -6,6 +6,13 @@
     <li>Done!</li>
   </ol>
 
-  <seefood-upload></seefood-upload>
+  <seefood-upload
+    (upload)="upload($event)"
+  ></seefood-upload>
+
+  <seefood-classification-result
+    *ngIf="(classificationResult$ | async) as classificationResult"
+    [classificationResult]="classificationResult"
+  ></seefood-classification-result>
 
 </div>
