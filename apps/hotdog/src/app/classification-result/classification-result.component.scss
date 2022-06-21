@@ -1,0 +1,28 @@
+.seefood-classification-result {
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    margin-top: 16px;
+    font-weight: bold;
+  }
+
+  &-data {
+    display: flex;
+    flex-direction: column;
+
+    .positive, .negative {
+      display: flex;
+      flex-direction: column;
+
+      mat-icon {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  &-action {
+    margin-top: 16px;
+    align-self: end;
+  }
+}
