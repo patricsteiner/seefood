@@ -1,16 +1,66 @@
-<form>
-  <input
-    type="file"
-    accept="image/*"
-    (change)="setFile($event.target)"
-    name="file"
-  >
-  <button
-    type="submit"
-    mat-flat-button
-    color="primary"
-    (click)="classify()"
-  >
-    Upload
-  </button>
-</form>
+<div class="seefood-upload">
+
+  <form class="seefood-upload-form" [formGroup]="uploadFormGroup">
+    <input
+      class="hidden-input"
+      type="file"
+      accept="image/*"
+      name="file"
+      formControlName="image"
+      (change)="setFile($event)"
+      #fileInput
+    />
+
+    <button
+      class="file-input-button"
+      mat-button
+      color="primary"
+      (click)="fileInput.click()"
+      [disabled]="uploadInProgress"
+    >
+      Choose image file
+    </button>
+
+    <div class="seefood-upload-preview">
+
+      <image-cropper
+        [maintainAspectRatio]="false"
+        *ngIf="imageChangedEvent && !uploadInProgress"
+        [imageChangedEvent]="imageChangedEvent"
+        (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+
+      <img
+        *ngIf="fileBase64Source && uploadInProgress"
+        class="seefood-upload-preview-image"
+        alt="Upload preview image"
+        [src]="fileBase64Source"
+        [class.upload-progress]="uploadInProgress"
+        (load)="setImageCenterPosition()"
+        #previewImage
+      />
+
+      <mat-spinner
+        *ngIf="uploadInProgress"
+        diameter="64"
+        [ngStyle]="{'top': imageCenterPosition.y + 'px', 'left': imageCenterPosition.x + 'px'}"
+      ></mat-spinner>
+
+    </div>
+
+    <span>{{file?.name}}</span>
+
+    <button
+      class="upload-button"
+      type="submit"
+      mat-flat-button
+      color="primary"
+      [disabled]="uploadInProgress || uploadFormGroup.invalid"
+      (click)="uploadFile()"
+    >
+      Upload
+    </button>
+  </form>
+
+</div>
+
